@@ -1,12 +1,5 @@
 # Disaster Response Pipeline Project
 
-<p align="center">
-  <a href="https://www.airbnb.com/">
-    <img src="https://1000logos.net/wp-content/uploads/2017/08/Airbnb-Logo-768x279.png" alt="AirBNB logo">
-  </a>
-</p>
-
-
 ## Table of contents
 
 - [Project Motivation](#project-motivation)
