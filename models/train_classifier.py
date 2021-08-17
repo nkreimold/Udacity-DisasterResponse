@@ -84,7 +84,7 @@ def perf_report(model, X_test, y_test):
         print(classification_report(y_test[column], y_pred[:, jj]))
         
 
-def build_model(X_test, y_test):
+def build_model(X_train, y_train):
     """
     Build model: this trains and fits a model and performs cross validation
     
@@ -114,7 +114,7 @@ def build_model(X_test, y_test):
     return(cv_improved)
 
 
-def evaluate_model(model, X_test, Y_test):
+def evaluate_model(model, X_test, y_test):
     """
     Evaluate Model: This takes a fit ML pipeline and prints out the model performance report
     
@@ -144,16 +144,16 @@ def main():
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
         X, Y, category_names = load_data(database_filepath)
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+        X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
         
         print('Building model...')
-        model = build_model()
+        model = build_model(X_train, y_train)
         
-        print('Training model...')
-        model.fit(X_train, Y_train)
+        #print('Training model...')
+        #model.fit(X_train, Y_train)
         
         print('Evaluating model...')
-        evaluate_model(model, X_test, Y_test, category_names)
+        evaluate_model(model, X_test, y_test)
 
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
         save_model(model, model_filepath)
