@@ -49,12 +49,13 @@ def clean_data(df):
 
         # convert column from string to numeric
         categories[column] = categories[column].astype(int)
+        
     categories = categories.drop('related', axis=1)
-
     df = df.drop('categories', axis=1)
+
     df =  pd.concat([df, categories],axis=1)
     df = df.drop_duplicates()
-    
+
     return df
 
 def save_data(df, database_filename):
@@ -65,7 +66,9 @@ def save_data(df, database_filename):
     
     """  
     engine = create_engine('sqlite:///'+database_filename+'.db')
-    df.to_sql(database_filename, engine, if_exists='replace')
+
+	#remove first part of string, if any
+    df.to_sql(database_filename.split("/")[-1], engine, if_exists='replace')
 
 
 def main():
@@ -80,6 +83,7 @@ def main():
         print('Cleaning data...')
         df = clean_data(df)
         
+
         print('Saving data...\n    DATABASE: {}'.format(database_filepath))
         save_data(df, database_filepath)
         

@@ -42,7 +42,7 @@ def load_data(database_filepath):
 
     # load data from database
     engine = create_engine('sqlite:///' + database_filepath+'.db')
-    df=read_sql_table(database_filepath, engine)
+    df=read_sql_table(database_filepath.split("/")[-1], engine)
 
     X=df['message']
     y=df.drop(['message','id','original','genre'],axis=1)
@@ -135,7 +135,7 @@ def save_model(model, model_filepath):
         model_filepath: save filepath
     
     """
-    with open('model.pkl', 'wb') as f:
+    with open('classifier.pkl', 'wb') as f:
         pickle.dump(model, f)
 
 

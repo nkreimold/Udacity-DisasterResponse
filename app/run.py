@@ -33,8 +33,7 @@ df = read_sql_table('DisasterResponse', engine)
 
 # load model
 model = joblib.load("models/classifier.pkl")
-
-df2 = df.iloc[:,4:]
+df2 = df.iloc[:,5:]
 category_counts=df2.sum(axis=0 )
 category_names=df2.columns
 
@@ -108,7 +107,7 @@ def go():
 
     # use model to predict classification for query
     classification_labels = model.predict([query])[0]
-    classification_results = dict(zip(df.columns[4:], classification_labels))
+    classification_results = dict(zip(df.columns[5:], classification_labels))
 
     # This will render the go.html Please see that file. 
     return render_template(
