@@ -49,7 +49,8 @@ def clean_data(df):
 
         # convert column from string to numeric
         categories[column] = categories[column].astype(int)
-    
+    categories = categories.drop('related', axis=1)
+
     df = df.drop('categories', axis=1)
     df =  pd.concat([df, categories],axis=1)
     df = df.drop_duplicates()
@@ -64,7 +65,7 @@ def save_data(df, database_filename):
     
     """  
     engine = create_engine('sqlite:///'+database_filename+'.db')
-    df.to_sql(database_filename, engine, index=False)
+    df.to_sql(database_filename, engine, if_exists='replace')
 
 
 def main():
