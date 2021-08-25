@@ -50,10 +50,13 @@ def clean_data(df):
         # convert column from string to numeric
         categories[column] = categories[column].astype(int)
         
-    categories = categories.drop('related', axis=1)
     df = df.drop('categories', axis=1)
 
     df =  pd.concat([df, categories],axis=1)
+    
+    #drop any cases where related is 2
+    df[df.related!=2]
+    
     df = df.drop_duplicates()
 
     return df
